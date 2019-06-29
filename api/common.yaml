@@ -26,7 +26,7 @@ paths:
           type: integer
       responses:
         '200':
-          description: Cutomer data
+          description: Customer data
           content:
             application/json:
               schema:
@@ -54,6 +54,26 @@ components:
           type: string
           description: Customer name
           example: Ivanov
+        street:
+          type: string
+          description: Custoner street
+          example: Markovskogo
+        house:
+          type: string
+          description: Customer hosuse number
+          example: 12a
+        flat:
+          type: integer
+          description: Customer flat number
+          example: 99
+        phone:
+          type: string
+          description: Customer phone number
+          example: +79991234567
+        email:
+          type: string
+          description: Customer email
+          example: user@mail.com
 
     Error:
       required:
