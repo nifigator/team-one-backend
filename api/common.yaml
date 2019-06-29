@@ -1,0 +1,68 @@
+openapi: 3.0.2
+info:
+  title: Ariadna API
+  contact:
+    name: Team One
+    email: nifigator@gmail.com
+  version: '1.0.0'
+
+servers:
+  - url: /api/v1.0
+
+paths:
+  /customer/{customer_id}:
+    get:
+      summary: Get customer Info
+      operationId: app.dummy
+      tags:
+        - Customers
+      parameters:
+      - name: customer_id
+        description: Customer unique identifier
+        in: path
+        required: true
+        example: 12
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Cutomer data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    Customer:
+      properties:
+        name:
+          type: string
+          description: Customer name
+          example: Ivan
+        middlename:
+          type: string
+          description: Customer name
+          example: Ivanovich
+        surname:
+          type: string
+          description: Customer name
+          example: Ivanov
+
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code: 
+          type: integer
+          format: int32
+        message:
+          type: string
+

@@ -1,0 +1,21 @@
+sudo: required
+
+services:
+  - docker
+
+dist: xenial
+language: python
+python:
+  - "3.5"
+  - "3.6"
+  - "3.7"
+
+script:
+  - python -m pytest -v
+
+deploy:
+  provider: script
+  script: sh .travis/deploy_dockerhub.sh
+  on:
+    branch: master
+
