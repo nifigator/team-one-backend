@@ -8,4 +8,5 @@ COPY manage.py /src
 COPY models.py /src
 COPY api /src/api
 COPY routes /src/routes
+COPY migrations /src/migrations
 CMD python3 /src/app.py

@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  title: Ariadna API
+  title: Team One API
   contact:
     name: Team One
     email: nifigator@gmail.com
