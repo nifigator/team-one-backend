@@ -114,6 +114,27 @@ components:
           items:
             type: string
             description: Specialization
+    Issue:
+      properties:
+        status:
+          type: string
+          description: Issue Status
+        catrgory:
+          type: string
+          description: Issue category
+        customer_id:
+          type: integer
+          description: Customer ID
+        body:
+          type: String
+          description: Issue text
+        create_data:
+          type: string
+          format: date-time
+          description: Issue create date and time
+        rating:
+          type: integer
+          description: Issue rating
 
     Error:
       required:
