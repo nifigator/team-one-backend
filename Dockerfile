@@ -4,6 +4,7 @@ COPY requirements.txt /src/requirements.txt
 RUN pip3 install -r /src/requirements.txt
 COPY app.py /src
 COPY config.py /src
+COPY manage.py /src
 COPY api /src/api
 COPY routes /src/routes
 CMD python3 /src/app.py
