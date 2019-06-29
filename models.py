@@ -6,7 +6,7 @@ class Issue(db.Model):
     __tablename__ = 'issues'
     id = db.Column(db.Integer, primary_key=True)
     status = db.Column(db.String(128))
-    catrgory = db.Colunm(db.String(128), nullable=False)
+    catrgory = db.Column(db.String(128), nullable=False)
     customer_id = db.Column(db.Integer, nullable=False)
     body = db.Column(db.Text, nullable=False)
     create_data = db.Column(db.DateTime(), default=datetime.utcnow)

@@ -114,6 +114,7 @@ components:
           items:
             type: string
             description: Specialization
+
     Issue:
       properties:
         status:
@@ -135,6 +136,18 @@ components:
         rating:
           type: integer
           description: Issue rating
+
+    Issues:
+      type: array
+      items:
+        allOf:
+        - type: object
+          properties:
+            id:
+              type: integer
+              description: Issue ID
+              example: 1123
+        - $ref: "#/components/schemas/Issue"
 
     Error:
       required:
