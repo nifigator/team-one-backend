@@ -13,7 +13,7 @@ paths:
   /customer/{customer_id}:
     get:
       summary: Get customer Info
-      operationId: app.dummy
+      operationId: routes.customers.get_customer
       tags:
         - Customers
       parameters:
@@ -77,7 +77,7 @@ components:
 
     Error:
       required:
-        - code
+        # - code
         - message
       properties:
         code: 
