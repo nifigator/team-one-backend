@@ -12,7 +12,7 @@ servers:
 paths:
   /customer/{customer_id}:
     get:
-      summary: Get customer Info
+      summary: Get customer information
       operationId: routes.customers.get_customer
       tags:
         - Customers
@@ -31,6 +31,34 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Customer"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /contractor/{contractor_id}:
+    get:
+      summary: Get contractor information
+      operationId: routes.contractors.get_contractor
+      tags:
+        - Contractors
+      parameters:
+      - name: contractor_id
+        description: Contractor unique identifier
+        in: path
+        required: true
+        example: 10
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Contractor data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contractor"
         default:
           description: Unexpected error
           content:
@@ -74,6 +102,18 @@ components:
           type: string
           description: Customer email
           example: user@mail.com
+
+    Contractor:
+      properties:
+        name:
+          type: string
+          description: Contractor name
+          example: JSC Smart
+        specializations:
+          type: array
+          items:
+            type: string
+            description: Specialization
 
     Error:
       required:
