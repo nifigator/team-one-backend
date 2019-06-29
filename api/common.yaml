@@ -65,6 +65,41 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /customer/{customer_id}/issues:
+    post:
+      summary: Create issue
+      operationId: routes.customers.create_issue
+      tags:
+        - Customers
+      parameters:
+      - name: customer_id
+        description: Customer unique identifier
+        in: path
+        required: true
+        example: 15
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomerIssue"
+      responses:
+        '201':
+          description: Issue created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomerIssue"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+    # get:
 
 components:
   schemas:
@@ -115,19 +150,19 @@ components:
             type: string
             description: Specialization
 
-    Issue:
+    CustomerIssue:
       properties:
         status:
           type: string
           description: Issue Status
-        catrgory:
+        category:
           type: string
           description: Issue category
-        customer_id:
-          type: integer
-          description: Customer ID
+        # customer_id:
+        #   type: integer
+        #   description: Customer ID
         body:
-          type: String
+          type: string
           description: Issue text
         create_data:
           type: string
@@ -137,7 +172,7 @@ components:
           type: integer
           description: Issue rating
 
-    Issues:
+    CustomerIssues:
       type: array
       items:
         allOf:
@@ -147,7 +182,7 @@ components:
               type: integer
               description: Issue ID
               example: 1123
-        - $ref: "#/components/schemas/Issue"
+        - $ref: "#/components/schemas/CustomerIssue"
 
     Error:
       required:

@@ -1,3 +1,5 @@
+from models import db, Issue, IssueSchema
+
 customers = {
     1: {
         'name': "Иван",
@@ -50,3 +52,24 @@ def get_customer(customer_id: int) -> tuple:
         'message': 'Customer with id {id} not found'.format(id=customer_id)
     }
     return response, 404
+
+def create_issue(customer_id: int, body: dict) -> tuple:
+    issue_schema = IssueSchema()
+    issue_data = issue_schema.load(body).data
+
+    new_issue = Issue(**issue_data)
+
+    if customers.get(customer_id):
+        new_issue.customer_id = customer_id
+    else:
+        response = {
+            'message': 'Customer with id {id} not exists'.format(id=customer_id)
+        }
+        return response, 409
+
+    db.session.add(new_issue)
+    db.session.commit()
+
+    issue_data = issue_schema.dump(new_issue).data
+
+    return issue_data, 201
