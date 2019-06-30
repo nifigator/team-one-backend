@@ -4,6 +4,7 @@ contractors = {
         'specializations': [
             "Сантехника",
         ],
+        'rating': 4.7,
     },
     2: {
         'name': "ООО Рога и копыта",
@@ -11,12 +12,14 @@ contractors = {
             "Электрика",
             "Сантехника",
         ],
+        'rating': 4.8,
     },
     3: {
         'name': "ООО Почини лифт",
         'specializations': [
             "Лифты",
-        ]
+        ],
+        'rating': 4.9,
     }
 }
 
