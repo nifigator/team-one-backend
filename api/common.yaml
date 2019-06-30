@@ -198,6 +198,51 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /issues:
+#     post:
+#       summary: Create issue
+#       operationId: app.dummy
+#       tags:
+#         - Management
+#       requestBody:
+#         required: true
+#         content:
+#           application/json:
+#             schema:
+#               $ref: "#/components/schemas/CustomerIssue"
+#       responses:
+#         '201':
+#           description: Issue created
+#           content:
+#             application/json:
+#               schema:
+#                 $ref: "#/components/schemas/CustomerIssue"
+#         default:
+#           description: Unexpected error
+#           content:
+#             application/json:
+#               schema:
+#                 $ref: "#/components/schemas/Error"
+# 
+    get:
+      summary: Get customer issues
+      operationId: routes.management.get_issues
+      tags:
+        - Management
+      responses:
+        '200':
+           description: Customer issues list
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/CustomerIssues"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
 
 components:
   schemas:
