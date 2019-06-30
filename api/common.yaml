@@ -159,6 +159,45 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+    put:
+      summary: Update customer issue
+      operationId: routes.customers.update_issue
+      tags:
+        - Customers
+      parameters:
+        - name: customer_id
+          description: Customer unique identifier
+          in: path
+          required: true
+          example: 15
+          schema:
+            type: integer
+        - name: issue_id
+          description: Issue unique identifier
+          in: path
+          required: true
+          example: 55
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomerIssue"
+      responses:
+        '200':
+          description: Updated customer issue data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomerIssue"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
 components:
   schemas:

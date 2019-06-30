@@ -110,3 +110,35 @@ def get_issue(customer_id: int, issue_id: int) -> tuple:
     issue_data = issue_schema.dump(issue).data
     return issue_data, 200
 
+def update_issue(customer_id: int, issue_id: int, body: dict) -> tuple:
+    if customers.get(customer_id) is None:
+        response = {
+            'message': 'Customer with id {id} not exists'.format(id=customer_id)
+        }
+        return response, 409
+
+    issue = (
+        Issue.query
+        .filter(Issue.customer_id == customer_id)
+        .filter(Issue.id == issue_id)
+        .one_or_none() 
+    )
+
+    if issue is None:
+        response = {
+            'message': 'Issue with id {id} not found'.format(id=issue_id)
+        }
+        return response, 404
+
+    for key in body.keys():
+        setattr(issue, key, body[key])
+
+    db.session.add(issue)
+    db.session.commit()
+
+    issue_schema = IssueSchema()
+    issue_data = issue_schema.dump(issue).data
+
+    return issue_data, 200
+
+
