@@ -11,6 +11,7 @@ class Issue(db.Model):
     body = db.Column(db.Text, nullable=False)
     create_data = db.Column(db.DateTime(), default=datetime.utcnow)
     rating = db.Column(db.Integer)
+    constractor = db.Column(db.String(256))
 
     def __repr__(self):
         return '<Issue {id}>'.format(id=self.id)

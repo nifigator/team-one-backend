@@ -342,6 +342,9 @@ components:
         rating:
           type: integer
           description: Issue rating
+        contractor:
+          type: string
+          description: Contractor name
 
     CustomerIssues:
       type: array
