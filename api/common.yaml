@@ -229,6 +229,31 @@ paths:
       operationId: routes.management.get_issues
       tags:
         - Management
+      parameters:
+      - name: offset
+        description: The starting position in the issue list.
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: limit
+        description: The number of issues output.
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: sort
+        description: Sort fields of issues output.
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fields
+        description: Filter fields of issues output.
+        in: query
+        required: false
+        schema:
+          type: string
       responses:
         '200':
            description: Customer issues list
