@@ -85,3 +85,28 @@ def get_issues(customer_id: int) -> tuple:
     issues_schema = IssueSchema(many=True)
     issues_data = issues_schema.dump(issues).data
     return issues_data, 200
+
+def get_issue(customer_id: int, issue_id: int) -> tuple:
+    if customers.get(customer_id) is None:
+        response = {
+            'message': 'Customer with id {id} not exists'.format(id=customer_id)
+        }
+        return response, 409
+
+    issue = (
+        Issue.query
+        .filter(Issue.customer_id == customer_id)
+        .filter(Issue.id == issue_id)
+        .one_or_none() 
+    )
+
+    if issue is None:
+        response = {
+            'message': 'Issue with id {id} not found'.format(id=issue_id)
+        }
+        return response, 404
+
+    issue_schema = IssueSchema()
+    issue_data = issue_schema.dump(issue).data
+    return issue_data, 200
+

@@ -125,6 +125,40 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /customer/{customer_id}/issues/{issue_id}:
+    get:
+      summary: Get customer issue
+      operationId: routes.customers.get_issue
+      tags:
+        - Customers
+      parameters:
+        - name: customer_id
+          description: Customer unique identifier
+          in: path
+          required: true
+          example: 15
+          schema:
+            type: integer
+        - name: issue_id
+          description: Issue unique identifier
+          in: path
+          required: true
+          example: 55
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Customer issue data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomerIssue"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
 components:
   schemas:
