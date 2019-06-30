@@ -1,8 +1,10 @@
 from models import db, Issue, IssueSchema
 
-def get_issues(offset=0, limit=None) -> tuple:
+def get_issues(offset=0, limit=None, sort='') -> tuple:
     # issues = Issue.query.order_by(Issue.id).all()
     issues = Issue.query
+    if sort:
+        sort_fields = sorf.split(',')
     issues = issues.order_by(Issue.id)
     if offset >= 0 and (limit == None or limit > 0):
         limit = offset + limit if limit else None
