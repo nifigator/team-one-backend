@@ -7,13 +7,15 @@ class Issue(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     status_id = db.Column(db.Integer, db.ForeignKey('statuses.id'),
         default=2)
-    category = db.Column(db.String(128), nullable=False)
+    category_id = db.Column(db.Integer,
+        db.ForeignKey('categories.id'))
     customer_id = db.Column(db.Integer, nullable=False)
     body = db.Column(db.Text, nullable=False)
     create_data = db.Column(db.DateTime(), default=datetime.utcnow)
     rating = db.Column(db.Integer)
     contractor = db.Column(db.String(256))
     status = db.relationship('Status')
+    category = db.relationship('Category')
 
     def __str__ (self):
         return self.name
@@ -41,6 +43,9 @@ class Category(db.Model):
     image_path = db.Column(db.String(255))
     description = db.Column(db.Text)
 
+    def __str__ (self):
+        return self.name
+
     def __repr__(self):
         return '<Category {id}>'.format(id=self.id)
 
@@ -49,6 +54,9 @@ class CategorySchema(ma.Schema):
     name = ma.String()
     image_name = ma.String()
     description = ma.String()
+
+    def __str__ (self):
+        return self.name
 
     def __repr__(self):
         return '<CategorySchema {id}>'.format(id=self.id)
