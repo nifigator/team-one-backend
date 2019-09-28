@@ -10,7 +10,7 @@ servers:
   - url: /api/v1.0
 
 paths:
-  /customer/{customer_id}:
+  /customers/{customer_id}:
     get:
       summary: Get customer information
       operationId: routes.customers.get_customer
@@ -38,34 +38,34 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /contractor/{contractor_id}:
-    get:
-      summary: Get contractor information
-      operationId: routes.contractors.get_contractor
-      tags:
-        - Contractors
-      parameters:
-      - name: contractor_id
-        description: Contractor unique identifier
-        in: path
-        required: true
-        example: 10
-        schema:
-          type: integer
-      responses:
-        '200':
-          description: Contractor data
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Contractor"
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-  /customer/{customer_id}/issues:
+#   /contractor/{contractor_id}:
+#     get:
+#       summary: Get contractor information
+#       operationId: routes.contractors.get_contractor
+#       tags:
+#         - Contractors
+#       parameters:
+#       - name: contractor_id
+#         description: Contractor unique identifier
+#         in: path
+#         required: true
+#         example: 10
+#         schema:
+#           type: integer
+#       responses:
+#         '200':
+#           description: Contractor data
+#           content:
+#             application/json:
+#               schema:
+#                 $ref: "#/components/schemas/Contractor"
+#         default:
+#           description: Unexpected error
+#           content:
+#             application/json:
+#               schema:
+#                 $ref: "#/components/schemas/Error"
+  /customers/{customer_id}/issues:
     post:
       summary: Create issue
       operationId: routes.customers.create_issue
@@ -125,7 +125,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /customer/{customer_id}/issues/{issue_id}:
+  /customers/{customer_id}/issues/{issue_id}:
     get:
       summary: Get customer issue
       operationId: routes.customers.get_issue
@@ -198,6 +198,57 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+
+#   /customers/categories:
+#     get:
+#       summary: Get categoties list
+#       operationId: routes.categories.get_categories
+#       tags:
+#         - Customers
+#         - Categories
+#       responses:
+#         '200':
+#            description: Categories list
+#            content:
+#              application/json:
+#                schema:
+#                  $ref: "#/components/schemas/Categories"
+#         default:
+#           description: Unexpected error
+#           content:
+#             application/json:
+#               schema:
+#                 $ref: "#/components/schemas/Error"
+# 
+#   /customers/categories/{category_id}:
+#     get:
+#       summary: Get category
+#       operationId: routes.categories.get_category
+#       tags:
+#         - Customers
+#         - Categories
+#       parameters:
+#         - name: category_id
+#           description: Category unique identifier
+#           in: path
+#           required: true
+#           example: 15
+#           schema:
+#             type: integer
+#       responses:
+#         '200':
+#           description: Category data
+#           content:
+#             application/json:
+#               schema:
+#                 $ref: "#/components/schemas/Category"
+#         default:
+#           description: Unexpected error
+#           content:
+#             application/json:
+#               schema:
+#                 $ref: "#/components/schemas/Error"
+
   /issues:
 #     post:
 #       summary: Create issue
@@ -268,6 +319,135 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /admins/categoties:
+    post:
+      summary: Create category
+      operationId: routes.categories.create_category
+      tags:
+        - Admin
+        - Categories
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Category"
+      responses:
+        '201':
+          description: Category created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    get:
+      summary: Get categoties list
+      operationId: routes.categories.get_categories
+      tags:
+        - Admin
+        - Categories
+      responses:
+        '200':
+           description: Categories list
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/Categories"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /admins/categories/{category_id}:
+    get:
+      summary: Get category
+      operationId: routes.categories.get_category
+      tags:
+        - Admin
+        - Categories
+      parameters:
+        - name: category_id
+          description: Category unique identifier
+          in: path
+          required: true
+          example: 15
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Category data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      summary: Update category
+      operationId: routes.categories.update_category
+      tags:
+        - Admin
+        - Categories
+      parameters:
+        - name: category_id
+          description: Category unique identifier
+          in: path
+          required: true
+          example: 15
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Category"
+      responses:
+        '200':
+          description: Updated category data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete category
+      operationId: routes.categories.delete_category
+      tags:
+        - Admin
+        - Categories
+      parameters:
+      - name: category_id
+        description: Category unique identifier
+        in: path
+        required: true
+        example: 12
+        schema:
+          type: integer
+      responses:
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
 
 components:
   schemas:
@@ -306,20 +486,20 @@ components:
           description: Customer email
           example: user@mail.com
 
-    Contractor:
-      properties:
-        name:
-          type: string
-          description: Contractor name
-          example: JSC Smart
-        specializations:
-          type: array
-          items:
-            type: string
-            description: Specialization
-        rating:
-          type: number
-          description: Contractor rating
+#     Contractor:
+#       properties:
+#         name:
+#           type: string
+#           description: Contractor name
+#           example: JSC Smart
+#         specializations:
+#           type: array
+#           items:
+#             type: string
+#             description: Specialization
+#         rating:
+#           type: number
+#           description: Contractor rating
 
     CustomerIssue:
       properties:
@@ -358,6 +538,34 @@ components:
               example: 1123
         - $ref: "#/components/schemas/CustomerIssue"
 
+    Category:
+      properties:
+        # category_id:
+        #   type: integer
+        #   description: Category ID
+        name:
+          type: string
+          description: Category name
+        image_path:
+          type: string
+          description: Image path
+        description:
+          type: string
+          description: Description
+
+    Categories:
+      type: array
+      items:
+        allOf:
+        - type: object
+          properties:
+            id:
+              type: integer
+              description: Category ID
+              example: 123
+        - $ref: "#/components/schemas/Category"
+
+
     Error:
       required:
         # - code
@@ -368,4 +576,5 @@ components:
           format: int32
         message:
           type: string
+
 

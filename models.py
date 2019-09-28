@@ -27,4 +27,23 @@ class IssueSchema(ma.Schema):
     contractor = ma.String()
 
     def __repr__(self):
-        return '<IssueSchema {id}>'.format(id=sefl.id)
+        return '<IssueSchema {id}>'.format(id=self.id)
+
+class Category(db.Model):
+    __tablename__ = 'categories'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False)
+    image_path = db.Column(db.String(255))
+    description = db.Column(db.Text)
+
+    def __repr__(self):
+        return '<Category {id}>'.format(id=self.id)
+
+class CategorySchema(ma.Schema):
+    id = ma.Integer(only_load=True)
+    name = ma.String()
+    image_name = ma.String()
+    description = ma.String()
+
+    def __repr__(self):
+        return '<CategorySchema {id}>'.format(id=self.id)
