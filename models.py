@@ -47,3 +47,24 @@ class CategorySchema(ma.Schema):
 
     def __repr__(self):
         return '<CategorySchema {id}>'.format(id=self.id)
+
+
+class Status(db.Model):
+    __tablename__ = 'statuses'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.Text)
+
+    def __repr__(self):
+        return '<Status {id}>'.format(id=self.id)
+
+   
+class StatusSchema(ma.Schema):
+    id = ma.Integer(only_load=True)
+    name = ma.String()
+    description = ma.String()
+
+    def __repr__(self):
+        return '<StatusSchema {id}>'.format(id=self.id)
+
+

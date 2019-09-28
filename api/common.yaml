@@ -448,6 +448,135 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /admins/statuses:
+    post:
+      summary: Create status
+      operationId: routes.statuses.create_status
+      tags:
+        - Admin
+        - Statuses
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Status"
+      responses:
+        '201':
+          description: Status created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    get:
+      summary: Get statuses list
+      operationId: routes.statuses.get_statuses
+      tags:
+        - Admin
+        - Statuses
+      responses:
+        '200':
+           description: Status list
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/Statuses"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /admins/statuses/{status_id}:
+    get:
+      summary: Get status
+      operationId: routes.statuses.get_status
+      tags:
+        - Admin
+        - Statuses
+      parameters:
+        - name: status_id
+          description: Status unique identifier
+          in: path
+          required: true
+          example: 15
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Status data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      summary: Update status
+      operationId: routes.statuses.update_status
+      tags:
+        - Admin
+        - Statuses
+      parameters:
+        - name: status_id
+          description: Status unique identifier
+          in: path
+          required: true
+          example: 15
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Status"
+      responses:
+        '200':
+          description: Updated status data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete status
+      operationId: routes.statuses.delete_status
+      tags:
+        - Admin
+        - Statuses
+      parameters:
+      - name: status_id
+        description: Status unique identifier
+        in: path
+        required: true
+        example: 12
+        schema:
+          type: integer
+      responses:
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
 
 components:
   schemas:
@@ -564,6 +693,30 @@ components:
               description: Category ID
               example: 123
         - $ref: "#/components/schemas/Category"
+
+    Status:
+      properties:
+        # category_id:
+        #   type: integer
+        #   description: Category ID
+        name:
+          type: string
+          description: Category name
+        description:
+          type: string
+          description: Description
+
+    Statuses:
+      type: array
+      items:
+        allOf:
+        - type: object
+          properties:
+            id:
+              type: integer
+              description: Status ID
+              example: 123
+        - $ref: "#/components/schemas/Status"
 
 
     Error:
