@@ -65,6 +65,9 @@ class Status(db.Model):
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text)
 
+    def __str__(self):
+        return self.name
+
     def __repr__(self):
         return '<Status {id}>'.format(id=self.id)
 
@@ -83,10 +86,12 @@ class IssueHistory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     issue_id = db.Column(db.Integer, db.ForeignKey('issues.id'),
         nullable=False)
+    status_id = db.Column(db.Integer, db.ForeignKey('statuses.id'))
     create_time = db.Column(db.DateTime(), default=datetime.utcnow)
     reason = db.Column(db.Text)
     note = db.Column(db.Text)
     issue = db.relationship('Issue')
+    status = db.relationship('Status')
 
 
 class IssueHistorySchema(ma.Schema):

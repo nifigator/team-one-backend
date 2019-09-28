@@ -1,4 +1,4 @@
-from models import db, Issue, IssueSchema
+from models import db, Issue, IssueSchema, IssueHistory
 
 customers = {
     1: {
@@ -72,6 +72,15 @@ def create_issue(customer_id: int, body: dict) -> tuple:
         return response, 409
 
     db.session.add(new_issue)
+    db.session.commit()
+
+    print(new_issue.body, new_issue.id)
+    issue_history = IssueHistory(
+        issue_id=new_issue.id,
+        status_id=1,
+    )
+
+    db.session.add(issue_history)
     db.session.commit()
 
     issue_data = issue_schema.dump(new_issue).data

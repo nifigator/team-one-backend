@@ -719,22 +719,22 @@ components:
 
     CustomerIssue:
       properties:
-        status:
-          type: string
-          description: Issue Status
-        category:
-          type: string
-          description: Issue category
-        # customer_id:
-        #   type: integer
-        #   description: Customer ID
+        status_id:
+          type: integer
+          description: Issue ID Status
+        category_id:
+          type: integer
+          description: Issue ID category
+        customer_id:
+          type: integer
+          description: Customer ID
         body:
           type: string
           description: Issue text
-        create_data:
-          type: string
-          format: date-time
-          description: Issue create date and time
+        # create_data:
+        #   crtype: string
+        #   crformat: date-time
+        #   crdescription: Issue create date and time
         rating:
           type: integer
           description: Issue rating
