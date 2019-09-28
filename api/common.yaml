@@ -271,6 +271,35 @@ paths:
 #               schema:
 #                 $ref: "#/components/schemas/Error"
 
+  /customers/issue_history/{issue_id}:
+    get:
+      summary: Get customer issue
+      operationId: routes.customers.get_issue_history
+      tags:
+        - Customers
+      parameters:
+        - name: issue_id
+          description: Issue unique identifier
+          in: path
+          required: true
+          example: 55
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Customer issue history data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomerIssueHistory"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+
   /issues:
 #     post:
 #       summary: Create issue
@@ -805,6 +834,23 @@ components:
               example: 123
         - $ref: "#/components/schemas/Status"
 
+    CustomerIssueHistory:
+      properties:
+        id:
+          type: integer
+          description: History isssue ID
+        status_id:
+          type: integer
+          description: Issue ID Status
+        customer_id:
+          type: integer
+          description: Customer ID
+        reason:
+          type: string
+          description: Reason text
+        note:
+          type: integer
+          description: Note rating
 
     Error:
       required:

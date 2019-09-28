@@ -97,6 +97,7 @@ class IssueHistory(db.Model):
 class IssueHistorySchema(ma.Schema):
     id = ma.Integer(only_load=True)
     issue_id = ma.Integer()
+    status_id = ma.Integer()
     customer_id = ma.Integer()
     create_time = ma.String()
     reason = ma.String()

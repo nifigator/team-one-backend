@@ -1,4 +1,4 @@
-from models import db, Issue, IssueSchema, IssueHistory
+from models import db, Issue, IssueSchema, IssueHistory, IssueHistorySchema
 
 customers = {
     1: {
@@ -165,5 +165,22 @@ def update_issue(customer_id: int, issue_id: int, body: dict) -> tuple:
     issue_data = issue_schema.dump(issue).data
 
     return issue_data, 200
+
+def get_issue_history(issue_id: int) -> tuple:
+    issue_history = (
+        IssueHistory.query
+        .filter(IssueHistory.issue_id == issue_id)
+        .all() 
+    )
+
+    if issue_history is None:
+        response = {
+            'message': 'Issue with id {id} not found'.format(id=issue_id)
+        }
+        return response, 404
+
+    issue_history_schema = IssueHistorySchema(many=True)
+    issue_history_data = issue_history_schema.dump(issue_history).data
+    return issue_history_data, 200
 
 
