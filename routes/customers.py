@@ -53,6 +53,10 @@ def get_customer(customer_id: int) -> tuple:
     }
     return response, 404
 
+def get_customers() -> tuple:
+    response = [{**customers[c], 'id': c} for c in customers.keys()]
+    return response, 200
+
 def create_issue(customer_id: int, body: dict) -> tuple:
     issue_schema = IssueSchema()
     issue_data = issue_schema.load(body).data
@@ -82,6 +86,12 @@ def get_issues(customer_id: int) -> tuple:
         return response, 409
 
     issues = Issue.query.filter(Issue.customer_id == customer_id).all()
+    issues_schema = IssueSchema(many=True)
+    issues_data = issues_schema.dump(issues).data
+    return issues_data, 200
+
+def get_all_issues() -> tuple:
+    issues = Issue.query.order_by(Issue.id).all()
     issues_schema = IssueSchema(many=True)
     issues_data = issues_schema.dump(issues).data
     return issues_data, 200

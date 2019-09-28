@@ -25,8 +25,8 @@ class Issue(db.Model):
 
 class IssueSchema(ma.Schema):
     id = ma.Integer(only_load=True)
-    status = ma.String()
-    category = ma.String()
+    status_id = ma.Integer()
+    category_id = ma.Integer()
     customer_id = ma.Integer()
     body = ma.String()
     create_data = ma.String()

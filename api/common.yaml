@@ -10,6 +10,26 @@ servers:
   - url: /api/v1.0
 
 paths:
+  /customers:
+    get:
+      summary: Get customer list
+      operationId: routes.customers.get_customers
+      tags:
+        - Customers
+      responses:
+        '200':
+          description: Customers data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customers"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
   /customers/{customer_id}:
     get:
       summary: Get customer information
@@ -65,6 +85,7 @@ paths:
 #             application/json:
 #               schema:
 #                 $ref: "#/components/schemas/Error"
+
   /customers/{customer_id}/issues:
     post:
       summary: Create issue
@@ -125,6 +146,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+
   /customers/{customer_id}/issues/{issue_id}:
     get:
       summary: Get customer issue
@@ -577,6 +599,59 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /admins/issues:
+#     post:
+#       summary: Create issue
+#       operationId: routes.customers.create_issue
+#       tags:
+#         - Customers
+#       parameters:
+#       - name: customer_id
+#         description: Customer unique identifier
+#         in: path
+#         required: true
+#         example: 15
+#         schema:
+#           type: integer
+#       requestBody:
+#         required: true
+#         content:
+#           application/json:
+#             schema:
+#               $ref: "#/components/schemas/CustomerIssue"
+#       responses:
+#         '201':
+#           description: Issue created
+#           content:
+#             application/json:
+#               schema:
+#                 $ref: "#/components/schemas/CustomerIssue"
+#         default:
+#           description: Unexpected error
+#           content:
+#             application/json:
+#               schema:
+#                 $ref: "#/components/schemas/Error"
+# 
+    get:
+      summary: Get customers issues
+      operationId: routes.customers.get_all_issues
+      tags:
+        - Admin
+      responses:
+        '200':
+           description: Customers issues list
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/CustomerIssues"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
 
 components:
   schemas:
@@ -614,6 +689,18 @@ components:
           type: string
           description: Customer email
           example: user@mail.com
+
+    Customers:
+      type: array
+      items:
+        allOf:
+        - type: object
+          properties:
+            id:
+              type: integer
+              description: Customer ID
+              example: 1123
+        - $ref: "#/components/schemas/Customer"
 
 #     Contractor:
 #       properties:
