@@ -74,7 +74,6 @@ def create_issue(customer_id: int, body: dict) -> tuple:
     db.session.add(new_issue)
     db.session.commit()
 
-    print(new_issue.body, new_issue.id)
     issue_history = IssueHistory(
         issue_id=new_issue.id,
         status_id=1,
@@ -148,6 +147,13 @@ def update_issue(customer_id: int, issue_id: int, body: dict) -> tuple:
             'message': 'Issue with id {id} not found'.format(id=issue_id)
         }
         return response, 404
+
+    if body.get('status_id') is not None and body['status_id'] != issue.status_id:
+        issue_history = IssueHistory(
+            issue_id=issue.id,
+            status_id=body['status_id'],
+        )
+        db.session.add(issue_history)
 
     for key in body.keys():
         setattr(issue, key, body[key])
