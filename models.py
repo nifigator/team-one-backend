@@ -17,9 +17,6 @@ class Issue(db.Model):
     status = db.relationship('Status')
     category = db.relationship('Category')
 
-    def __str__ (self):
-        return self.name
-
     def __repr__(self):
         return '<Issue {id}>'.format(id=self.id)
 
@@ -80,4 +77,23 @@ class StatusSchema(ma.Schema):
     def __repr__(self):
         return '<StatusSchema {id}>'.format(id=self.id)
 
+
+class IssueHistory(db.Model):
+    __tablename__ = 'issue_history'
+    id = db.Column(db.Integer, primary_key=True)
+    issue_id = db.Column(db.Integer, db.ForeignKey('issues.id'),
+        nullable=False)
+    create_time = db.Column(db.DateTime(), default=datetime.utcnow)
+    reason = db.Column(db.Text)
+    note = db.Column(db.Text)
+    issue = db.relationship('Issue')
+
+
+class IssueHistorySchema(ma.Schema):
+    id = ma.Integer(only_load=True)
+    issue_id = ma.Integer()
+    customer_id = ma.Integer()
+    create_time = ma.String()
+    reason = ma.String()
+    note = ma.String()
 
