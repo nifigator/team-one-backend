@@ -5,13 +5,18 @@ from config import db, ma
 class Issue(db.Model):
     __tablename__ = 'issues'
     id = db.Column(db.Integer, primary_key=True)
-    status = db.Column(db.String(128), default='0')
+    status_id = db.Column(db.Integer, db.ForeignKey('statuses.id'),
+        default=2)
     category = db.Column(db.String(128), nullable=False)
     customer_id = db.Column(db.Integer, nullable=False)
     body = db.Column(db.Text, nullable=False)
     create_data = db.Column(db.DateTime(), default=datetime.utcnow)
     rating = db.Column(db.Integer)
     contractor = db.Column(db.String(256))
+    status = db.relationship('Status')
+
+    def __str__ (self):
+        return self.name
 
     def __repr__(self):
         return '<Issue {id}>'.format(id=self.id)
