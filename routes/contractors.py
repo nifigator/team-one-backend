@@ -1,3 +1,5 @@
+from models import db, Issue, IssueSchema
+
 contractors = {
     1: {
         'name': "ИП Пупкин",
@@ -31,3 +33,10 @@ def get_contractor(contractor_id: int) -> tuple:
         'message': "Contractor with id {id} not found.".format(id=contractor_id)
     }
     return response, 404
+
+def get_issues(contractor_id: int) -> tuple:
+    issues = Issue.query.filter(Issue.contractor_id == contractor_id).all()
+    issues_schema = IssueSchema(many=True)
+    issues_data = issues_schema.dump(issues).data
+    return issues_data, 200
+

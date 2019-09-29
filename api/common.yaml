@@ -175,7 +175,33 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-
+  /contractor/{contractor_id}/issues:
+    get:
+      summary: Get contractor issues
+      operationId: routes.contractors.get_issues
+      tags:
+        - Contractor
+      parameters:
+       - name: contractor_id
+         description: Contractor unique identifier
+         in: path
+         required: true
+         example: 15
+         schema:
+          type: integer
+      responses:
+        '200':
+           description: Contractor issues list
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/CustomerIssues"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
   /customers/{customer_id}/issues/{issue_id}:
     get:
