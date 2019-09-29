@@ -1199,6 +1199,12 @@ components:
         contractor:
           type: string
           description: Contractor name
+        contractor_id:
+          type: integer
+          description: Contractor ID
+        management_id:
+          type: Integer
+          description: Management company ID
 
     CustomerIssues:
       type: array

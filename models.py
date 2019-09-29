@@ -27,10 +27,12 @@ class IssueSchema(ma.Schema):
     status_id = ma.Integer()
     category_id = ma.Integer()
     customer_id = ma.Integer()
+    management_id = ma.Integer()
     body = ma.String()
     create_data = ma.String()
     rating = ma.Integer()
     contractor = ma.String()
+    contractor_id = ma.Integer()
 
     def __repr__(self):
         return '<IssueSchema {id}>'.format(id=self.id)
