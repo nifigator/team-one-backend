@@ -681,6 +681,379 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /events:
+    post:
+      summary: Create event
+      operationId: routes.events.create_event
+      tags:
+        - Events
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Event"
+      responses:
+        '201':
+          description: Event created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    get:
+      summary: Get events list
+      operationId: routes.events.get_events
+      tags:
+        - Events
+      responses:
+        '200':
+           description: Events list
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/Events"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /events/{event_id}:
+    get:
+      summary: Get event
+      operationId: routes.events.get_event
+      tags:
+        - Events
+      parameters:
+        - name: event_id
+          description: Event unique identifier
+          in: path
+          required: true
+          example: 15
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Event data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      summary: Update event
+      operationId: routes.events.update_event
+      tags:
+        - Events
+      parameters:
+        - name: event_id
+          description: Event unique identifier
+          in: path
+          required: true
+          example: 15
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Event"
+      responses:
+        '200':
+          description: Updated event data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete event
+      operationId: routes.events.delete_event
+      tags:
+        - Events
+      parameters:
+      - name: event_id
+        description: Event unique identifier
+        in: path
+        required: true
+        example: 12
+        schema:
+          type: integer
+      responses:
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /subscribers:
+    post:
+      summary: Create subscriber
+      operationId: routes.events.create_subscriber
+      tags:
+        - Subscribers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Subscriber"
+      responses:
+        '201':
+          description: Subscriber created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subscriber"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    get:
+      summary: Get subscribers list
+      operationId: routes.events.get_subscribers
+      tags:
+        - Subscribers
+      responses:
+        '200':
+           description: Subsciber list
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/Subscribers"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /subscribers/{subscriber_id}:
+    get:
+      summary: Get subscriber
+      operationId: routes.events.get_subscriber
+      tags:
+        - Subscribers
+      parameters:
+        - name: subscriber_id
+          description: Subscriber unique identifier
+          in: path
+          required: true
+          example: 15
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Subscriber data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subscriber"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      summary: Update subscriber
+      operationId: routes.events.update_subscriber
+      tags:
+        - Subscribers
+      parameters:
+        - name: subscriber_id
+          description: Subscriber unique identifier
+          in: path
+          required: true
+          example: 15
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Subscriber"
+      responses:
+        '200':
+          description: Updated subscriber data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subscriber"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete subscriber
+      operationId: routes.events.delete_subscriber
+      tags:
+        - Subscribers
+      parameters:
+      - name: subscriber_id
+        description: Subscriber unique identifier
+        in: path
+        required: true
+        example: 12
+        schema:
+          type: integer
+      responses:
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /handlers:
+    post:
+      summary: Create handler
+      operationId: routes.events.create_handler
+      tags:
+        - Handlers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Handler"
+      responses:
+        '201':
+          description: Handler created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Handler"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    get:
+      summary: Get handlers list
+      operationId: routes.events.get_handlers
+      tags:
+        - Handlers
+      responses:
+        '200':
+           description: Handler list
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/Handlers"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /handlers/{handler_id}:
+    get:
+      summary: Get handler
+      operationId: routes.events.get_handler
+      tags:
+        - Handlers
+      parameters:
+        - name: handler_id
+          description: Handler unique identifier
+          in: path
+          required: true
+          example: 15
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Handler data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Handler"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      summary: Update handler
+      operationId: routes.events.update_handler
+      tags:
+        - Handlers
+      parameters:
+        - name: handler_id
+          description: Hanlder unique identifier
+          in: path
+          required: true
+          example: 15
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Handler"
+      responses:
+        '200':
+          description: Updated handler data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Handler"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete handler
+      operationId: routes.events.delete_handler
+      tags:
+        - Handlers
+      parameters:
+      - name: handler_id
+        description: Handler unique identifier
+        in: path
+        required: true
+        example: 12
+        schema:
+          type: integer
+      responses:
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+
 
 components:
   schemas:
@@ -851,6 +1224,76 @@ components:
         note:
           type: integer
           description: Note rating
+
+    Event:
+      properties:
+        dt:
+          type: string
+          description: Date and time
+        event_type:
+          type: string
+          description: Event type
+        payload:
+          type: string
+          description: Payload
+        state:
+          type: integer
+          description: State
+
+    Events:
+      type: array
+      items:
+        allOf:
+        - type: object
+          properties:
+            id:
+              type: integer
+              description: Event ID
+              example: 123
+        - $ref: "#/components/schemas/Event"
+
+    Subscriber:
+      properties:
+        event_type:
+          type: string
+          description: Event type
+        handler_id:
+          type: integer
+          description: Handler ID
+
+    Subscribers:
+      type: array
+      items:
+        allOf:
+        - type: object
+          properties:
+            id:
+              type: integer
+              description: Subscriber ID
+              example: 123
+        - $ref: "#/components/schemas/Subscriber"
+
+    Handler:
+      properties:
+        about:
+          type: string
+          description: About
+        cmd:
+          type: string
+          description: cmd
+
+    Handlers:
+      type: array
+      items:
+        allOf:
+        - type: object
+          properties:
+            id:
+              type: integer
+              description: Handler ID
+              example: 123
+        - $ref: "#/components/schemas/Handler"
+
 
     Error:
       required:
