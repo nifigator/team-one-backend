@@ -35,3 +35,9 @@ def get_issues(offset=0, limit=None, sort='') -> tuple:
 
     return issues_data, 200
 
+def get_issues_by_mgmt(management_id: int) -> tuple:
+    issues = Issue.query.filter(Issue.management_id == management_id).all()
+    issues_schema = IssueSchema(many=True)
+    issues_data = issues_schema.dump(issues).data
+    return issues_data, 200
+

@@ -147,6 +147,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /management/{management_id}/issues:
+    get:
+      summary: Get customer issues by management
+      operationId: routes.management.get_issues_by_mgmt
+      tags:
+        - Management
+      parameters:
+       - name: management_id
+         description: Management unique identifier
+         in: path
+         required: true
+         example: 15
+         schema:
+          type: integer
+      responses:
+        '200':
+           description: Customer issues list
+           content:
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/CustomerIssues"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+
+
   /customers/{customer_id}/issues/{issue_id}:
     get:
       summary: Get customer issue
