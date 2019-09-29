@@ -69,7 +69,7 @@ class Status(db.Model):
         return self.name
 
     def __repr__(self):
-        return '<Status {id}>'.format(id=self.id)
+        return '<Status {name}>'.format(id=self.name)
 
    
 class StatusSchema(ma.Schema):
@@ -78,7 +78,7 @@ class StatusSchema(ma.Schema):
     description = ma.String()
 
     def __repr__(self):
-        return '<StatusSchema {id}>'.format(id=self.id)
+        return '<StatusSchema {name}>'.format(id=self.name)
 
 
 class IssueHistory(db.Model):
@@ -103,3 +103,53 @@ class IssueHistorySchema(ma.Schema):
     reason = ma.String()
     note = ma.String()
 
+
+class Event(db.Model):
+    __tablename__ = 'events'
+    id = db.Column(db.Integer, primary_key=True)
+    dt = db.Column(db.DateTime(), default=datetime.utcnow)
+    event_type = db.Column(db.String(128), nullable=False)
+    payload = db.Column(db.Text)
+    state = db.Column(db.Integer, default=0)
+
+    def __repr__(self):
+        return '<Event {id}>'.format(id=self.id)
+
+
+class EventSchema(ma.Schema):
+    id = ma.Integer(only_load=True)
+    dt = ma.String()
+    event_type = ma.String()
+    payload = ma.String()
+    state = ma.Integer()
+
+
+class Subscriber(db.Model):
+    __tablename__ = 'subscribers'
+    id = db.Column(db.Integer, primary_key=True)
+    event_type = db.Column(db.String(128), nullable=False)
+    handler_id = db.Column(db.Integer)
+
+    def __repr__(self):
+        return '<Subscriber {id}>'.format(id=self.id)
+
+
+class SubscriberSchema(ma.Schema):
+    id = ma.Integer(only_load=True)
+    event_type = ma.String()
+    handler_id = ma.Integer()
+
+
+class Handler(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    about = db.Column(db.Text)
+    cmd = db.Column(db.Text)
+
+    def __repr__(self):
+        return '<Handler {id}>'.format(id=self.id)
+
+
+class HandlerSchema(ma.Schema):
+    id = ma.Integer(only_load=True)
+    about = ma.String()
+    cmd = ma.String()
