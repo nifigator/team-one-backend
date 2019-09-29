@@ -1203,7 +1203,7 @@ components:
           type: integer
           description: Contractor ID
         management_id:
-          type: Integer
+          type: integer
           description: Management company ID
 
     CustomerIssues:

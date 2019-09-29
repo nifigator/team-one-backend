@@ -57,7 +57,7 @@ def get_customers() -> tuple:
     response = [{**customers[c], 'id': c} for c in customers.keys()]
     return response, 200
 
-def create_issue(customer_id: int, body: dict) -> tuple:
+def create_issue(customer_id, body):
     issue_schema = IssueSchema()
     issue_data = issue_schema.load(body).data
 
